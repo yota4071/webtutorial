@@ -12,10 +12,16 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: build
-      run: python3 make_title.py
+      run: |
+        python3 make_title.py
+        mkdir out
+        mv index.html out/index.html
+        mv pages out
 
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: .
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
